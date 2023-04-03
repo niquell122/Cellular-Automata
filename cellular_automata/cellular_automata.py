@@ -79,5 +79,5 @@ class CellularAutomata:
             for j in range(len(self.cells[i])):
                 neighborhood = self.get_neighborhood(i, j)
                 self.cells[i][j] = self.rule(self.get_cell(i, j), neighborhood)
-        
+        del self.snapshot
         self.snapshot = deepcopy(self.cells)

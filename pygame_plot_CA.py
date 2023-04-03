@@ -70,11 +70,13 @@ def evolveOnce():
 
 def verboseEvolve(n_steps):
     for i in range(n_steps):
+        print(str(i+1))
         evolveOnce()
 
 def fastEvolve(n_steps):
     for i in range(n_steps):
         _2B.evolve()
+    sleep(0.2)
     update_screen()
 
 crashed = False
@@ -91,3 +93,7 @@ while not crashed:
                 fastEvolve(10)
             if event.key == pygame.K_v:
                 verboseEvolve(10)
+            if event.key == pygame.K_q:
+                pygame.quit()
+            if event.key == pygame.K_u:
+                update_screen()
