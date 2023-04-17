@@ -4,9 +4,7 @@ import pylab
 from time import sleep
 
 import matplotlib.backends.backend_agg as agg
-import matplotlib.pyplot as plt
 import matplotlib
-from matplotlib import animation
 matplotlib.use("Agg")
 
 from cellular_automata.prototype_2B import _2B
