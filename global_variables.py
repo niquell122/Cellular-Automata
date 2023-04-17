@@ -1,5 +1,5 @@
 square_size = 1                 # meter
-side = 300                      # array dimensions
+map_side = 300                  # array dimensions
 
 
 #### Cell Colors
@@ -21,3 +21,5 @@ catch_fire_chance = {
     7: 1,
     8: 1
 }
+### ao aplicar a matriz do vento estes valores se tornam o coeficiente de "catch_fire" mas funcionam da mesma maneira (mudar valores%)
+### dict coef:chance

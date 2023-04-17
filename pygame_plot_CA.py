@@ -7,16 +7,16 @@ import matplotlib.backends.backend_agg as agg
 import matplotlib
 matplotlib.use("Agg")
 
-from cellular_automata.prototype_2B import _2B
+from cellular_automata.prototype_probabilistic import _2B
 
-window_width = 900
+window_width = 1200
 window_height = 900
 surface_width = 123
 
-figsize_x = 5 # inches
-figsize_y = 5 # inches
+figsize_x = 12 # inches
+figsize_y = 12 # inches
 
-fig_dpi = 100 # pixels per inch
+fig_dpi = 60 # pixels per inch
 
 map_cord_x = window_width/2 - (figsize_x * fig_dpi)/2
 map_cord_y = 50
