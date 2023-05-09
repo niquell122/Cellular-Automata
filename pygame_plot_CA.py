@@ -9,6 +9,7 @@ matplotlib.use("Agg")
 
 from cellular_automata.prototype_probabilistic import _2B
 
+
 window_width = 1200
 window_height = 900
 surface_width = 123

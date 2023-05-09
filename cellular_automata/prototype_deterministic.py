@@ -1,6 +1,7 @@
 import random
 from cellular_automata.cellular_automata import CellularAutomata
 from math import floor
+import numpy as np
 
 from global_variables import map_side
 from global_variables import empty_color
@@ -12,42 +13,42 @@ from global_variables import catch_fire_chance
 import cellular_automata.terrain as terrain
 
 def fire(cells):
-    total = 0
-    for cell in cells:
-        if cell == fire_color:
-            total += 1
-    return total
+    return count_color(cells, fire_color)
 
 
 def ashes(cells):
-    total = 0
-    for cell in cells:
-        if cell == ash_color:
-            total += 1
-    return total
+    return count_color(cells, ash_color)
 
 
-def wildfire_deterministic(curr, neigh):
+def count_color(neighborhood, color):
+        n_color=0
+        for i in range(np.size(neighborhood, axis=0)):
+            for j in range(np.size(neighborhood, axis=1)):
+                if(neighborhood[i][j] == color):
+                    n_color+=1
+        return n_color
+
+
+def wildfire_deterministic(home, neigh):
     fire_neighbors = fire(neigh)
     ash_neighbors = ashes(neigh)
     
     ### combinando caracteristicas de diversos modelos
-    if curr == forest_color:
-        
+    if home == forest_color:
         if fire_neighbors > 2:
             return fire_color
         else:
             return forest_color
 
-    if curr == fire_color and fire_neighbors > 7:
+    if home == fire_color and fire_neighbors > 7:
         return ash_color
 
-    if curr == fire_color and fire_neighbors < ash_neighbors:
+    if home == fire_color and fire_neighbors < ash_neighbors:
         return ash_color
     ### o fogo apaga em função do tempo. parâmetro _tempo_de_queima_
     ### reignição
     ### matriz de influencia do vento
-    return curr
+    return home
 
 arr = terrain.random_spread_in_the_center(40)
 

@@ -1,4 +1,5 @@
 from copy import deepcopy
+import numpy as np
 
 def default_rule(current_state, neighborhood):  # rule for Life Automata
     total = sum(neighborhood)
@@ -58,12 +59,17 @@ class CellularAutomata:
     ### a.k.a.
     ### Queen's Neighborhood
     def get_neighborhood(self, x, y):
-        result = []        
+        neighborhood = np.empty((3,3), dtype=tuple)
+        row=0     
         for i in range(x - 1, x + 2):
+            column=0
             for j in range(y - 1, y + 2):
-                result.append(self.get_cell(i, j))
-        return result
-
+                neighborhood[row][column] = self.get_cell(i,j)
+                column+=1
+            row+=1    
+        return neighborhood        
+    
+    
     ### Edges are cyclical
     def get_cell(self, x, y):
         xmod = x % self.X

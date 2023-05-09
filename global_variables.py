@@ -1,5 +1,5 @@
 square_size = 1                 # meter
-map_side = 300                  # array dimensions
+map_side = 150                  # array dimensions
 
 
 #### Cell Colors

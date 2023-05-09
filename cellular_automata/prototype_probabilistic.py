@@ -8,30 +8,32 @@ from global_variables import fire_color
 from global_variables import forest_color
 from global_variables import ash_color
 from global_variables import catch_fire_chance
+import numpy as np
 
 import cellular_automata.terrain as terrain
 
 def fire(cells):
-    total = 0
-    for cell in cells:
-        if cell == fire_color:
-            total += 1
-    return total
+    return count_color(cells, fire_color)
 
 
 def ashes(cells):
-    total = 0
-    for cell in cells:
-        if cell == ash_color:
-            total += 1
-    return total
+    return count_color(cells, ash_color)
 
-def wildfire_prob(curr, neigh):
+
+def count_color(neighborhood, color):
+        n_color=0
+        for i in range(np.size(neighborhood, axis=0)):
+            for j in range(np.size(neighborhood, axis=1)):
+                if(neighborhood[i][j] == color):
+                    n_color+=1
+        return n_color
+
+def wildfire_prob(home, neigh):
     fire_neighbors = fire(neigh)
     ash_neighbors = ashes(neigh)
     
     ### combinando caracteristicas de diversos modelos
-    if curr == forest_color:
+    if home == forest_color:
         chance = catch_fire_chance[fire_neighbors]
         
         if random.random() < chance:
@@ -39,15 +41,15 @@ def wildfire_prob(curr, neigh):
         else:
             return forest_color
 
-    if curr == fire_color and fire_neighbors > 7:
+    if home == fire_color and fire_neighbors > 7:
         return ash_color
 
-    if curr == fire_color and fire_neighbors < ash_neighbors:
+    if home == fire_color and fire_neighbors < ash_neighbors:
         return ash_color
     ### o fogo apaga em função do tempo. parâmetro _tempo_de_queima_
     ### reignição
     ### matriz de influencia do vento
-    return curr
+    return home
 
 arr = terrain.random_spread_in_the_center(40)
 
