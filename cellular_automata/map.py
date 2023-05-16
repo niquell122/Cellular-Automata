@@ -25,7 +25,7 @@ def single_staring_point(size):
 
 def random_spread_in_the_center(size):
     arr = []
-    choices = [forest_color, forest_color, forest_color, forest_color, forest_color, forest_color, forest_color, fire_color] 
+    choices = [forest_color, forest_color, forest_color, forest_color, fire_color] 
 
     for i in range(map_side):
         arr.append([])

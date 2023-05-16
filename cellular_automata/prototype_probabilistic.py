@@ -10,7 +10,7 @@ from global_variables import ash_color
 from global_variables import catch_fire_chance
 import numpy as np
 
-import cellular_automata.terrain as terrain
+import cellular_automata.map as map
 
 def fire(cells):
     return count_color(cells, fire_color)
@@ -51,6 +51,6 @@ def wildfire_prob(home, neigh):
     ### matriz de influencia do vento
     return home
 
-arr = terrain.random_spread_in_the_center(40)
+arr = map.random_spread_in_the_center(40)
 
 _2B = CellularAutomata(arr, wildfire_prob)
