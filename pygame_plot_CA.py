@@ -11,7 +11,7 @@ matplotlib.use("Agg")
 from global_variables import gen_text_color
 from global_variables import text_rect_color
 
-from cellular_automata.prototype_wind import _2B
+from cellular_automata.prototype_probabilistic import _2B
 
 prototype = "WIND"
 
@@ -70,7 +70,6 @@ def save_data(surf):
         pygame.image.save(surf, image_path)
 
 
-#### PYGAME INIT ####
 
 pygame.init()
 pygame.font.init()
@@ -80,10 +79,8 @@ window = (window_width, window_height)
 screen = pygame.display.set_mode(window, DOUBLEBUF)
 screen.fill((240,240,240))
 screen = pygame.display.get_surface()
-#### PYGAME INIT ####
 
 
-#### PLOT MATRIX ####
 fig = pylab.figure(figsize=[figsize_x, figsize_y], # Inches
                     dpi=fig_dpi,        # 100 dots per inch, so the resulting buffer is 400x400 pixels
                     )
@@ -100,7 +97,6 @@ surf = pygame.image.fromstring(raw_data, size, "RGB")
 screen.blit(surf, (map_cords))
 pygame.display.flip()
 
-#### PLOT MATRIX ####
 
 def update_screen():
     im.set_data(_2B.cells)
@@ -183,9 +179,8 @@ def no_auto():
                 if event.key == pygame.K_u:
                     update_screen()
 
-
 is_auto = True
-   
+
 if is_auto:
     auto()
 else:

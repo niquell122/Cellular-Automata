@@ -9,9 +9,9 @@ default_wind = [
 
 wind_dict = {
     'north_south_wind': np.array([
-        [1.60, 3.80, 1.60],
-        [1.00, 1.00, 1.00],
-        [0.95, 1.45, 0.95]
+        [0.75, 1.90, 0.75],
+        [0.50, 1.00, 0.50],
+        [0.40, 1.45, 0.40]
     ]),
     'east_west_wind': np.array([
         [0.30, 0.25, 0.40],
@@ -24,7 +24,6 @@ wind_dict = {
         [0.5, 1.0, 2.0]
     ])
 }
-# wind_dict.setdefault(default_wind)
 
 def get_wind(name, custom_wind=[], intensity=1):
     if(custom_wind==[]):
