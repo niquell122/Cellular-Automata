@@ -11,7 +11,7 @@ matplotlib.use("Agg")
 from global_variables import gen_text_color
 from global_variables import text_rect_color
 
-from cellular_automata.prototype_probabilistic import _2B
+from cellular_automata.prototype_wind import _2B
 
 prototype = "WIND"
 
@@ -56,7 +56,6 @@ def get_gen_text():
     global gen_text
     return f"{gen_text} {generation}"
 
-
 def save_data(surf):
     global generation
     global savepoints
@@ -69,8 +68,6 @@ def save_data(surf):
         image_path = os.path.join(prototype_folder_path, f"{get_gen_text()}.png")
         pygame.image.save(surf, image_path)
 
-
-
 pygame.init()
 pygame.font.init()
 font = pygame.font.Font(None, 24)
@@ -79,7 +76,6 @@ window = (window_width, window_height)
 screen = pygame.display.set_mode(window, DOUBLEBUF)
 screen.fill((240,240,240))
 screen = pygame.display.get_surface()
-
 
 fig = pylab.figure(figsize=[figsize_x, figsize_y], # Inches
                     dpi=fig_dpi,        # 100 dots per inch, so the resulting buffer is 400x400 pixels
@@ -96,7 +92,6 @@ surf = pygame.image.fromstring(raw_data, size, "RGB")
 
 screen.blit(surf, (map_cords))
 pygame.display.flip()
-
 
 def update_screen():
     im.set_data(_2B.cells)
@@ -132,7 +127,6 @@ def fastEvolve(n_steps):
         _2B.evolve()
 
     update_screen()
-
 
 def inside_map(pos):
     if inside_mapX(pos[0]) and inside_mapY(pos[1]):
