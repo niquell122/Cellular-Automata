@@ -19,9 +19,10 @@ current_time = time.time()
 formatted_time = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(current_time))
 
 
-folder_name = f"{prototype} {formatted_time}"
 current_dir = os.getcwd()
-folder_path = os.path.join(current_dir, "data", folder_name)
+folder_name = f"{prototype} {formatted_time}"
+data_folder_path = os.path.join(current_dir, "data")
+prototype_folder_path = os.path.join(data_folder_path, folder_name)
 
 window_width = 1200
 window_height = 900
@@ -37,7 +38,7 @@ map_cord_y = 50
 map_cords = (map_cord_x, map_cord_y)
 
 generation = 1
-savepoints = [1, 2, 3, 4, 5, 8, 10, 20, 30]
+savepoints = [1, 2, 3, 4, 5, 8, 10, 20, 30, 40]
 
 def increase_generation():
     global generation
@@ -53,21 +54,22 @@ gen_text = "Gen "
 def get_gen_text():
     global generation
     global gen_text
-    
     return f"{gen_text} {generation}"
-    
+
 
 def save_data(surf):
     global generation
     global savepoints
     if generation in savepoints:
         print("Saving... " + get_gen_text())
-        if not os.path.exists(folder_path):
-            os.makedirs(folder_path)
-        image_path = os.path.join(folder_path, f"{get_gen_text()}.png")
+        if not os.path.exists(data_folder_path):
+            os.makedirs(data_folder_path)
+        if not os.path.exists(prototype_folder_path):
+            os.makedirs(prototype_folder_path)
+        image_path = os.path.join(prototype_folder_path, f"{get_gen_text()}.png")
         pygame.image.save(surf, image_path)
-        
-        
+
+
 #### PYGAME INIT ####
 
 pygame.init()
@@ -121,7 +123,6 @@ def update_screen():
 def evolveOnce():
     increase_generation()
     _2B.evolve()
-    time.sleep(0.2)
     update_screen()
 
 def verboseEvolve(n_steps):
@@ -134,7 +135,6 @@ def fastEvolve(n_steps):
         increase_generation()
         _2B.evolve()
 
-    time.sleep(0.2)
     update_screen()
 
 
@@ -143,7 +143,7 @@ def inside_map(pos):
         return True
     else:
         return False
-    
+  
 def inside_mapX(posX):
     if map_cord_x <= posX <= map_cord_x + window_width:
         return True

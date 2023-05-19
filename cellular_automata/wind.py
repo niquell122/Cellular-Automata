@@ -9,14 +9,14 @@ default_wind = [
 
 wind_dict = {
     'north_south_wind': np.array([
-        [1.2, 1.5, 1.2],
-        [0.8, 1.0, 0.8],
-        [0.7, 0.6, 0.7]
+        [1.60, 3.80, 1.60],
+        [1.00, 1.00, 1.00],
+        [0.95, 1.45, 0.95]
     ]),
     'east_west_wind': np.array([
-        [0.5, 1.0, 2.0],
-        [0.5, 1.0, 2.0],
-        [0.5, 1.0, 2.0]
+        [0.30, 0.25, 0.40],
+        [0.35, 1.00, 1.00],
+        [0.30, 0.25, 0.40]
     ]),
     'wasd': np.array([
         [0.85, 1.0, 0.85],
@@ -44,7 +44,7 @@ def neighborhood_fire(neighborhood, *args):
     return new_neighborhood
 
 
-def apply_wind(neighborhood, wind, intensity=1):
+def apply_wind(neighborhood, wind=default_wind, intensity=1):
     for i in range(3):
         neighborhood[i]=neighborhood[i] * wind[i] * intensity
     return neighborhood
