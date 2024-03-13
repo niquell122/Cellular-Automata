@@ -49,6 +49,9 @@ def get_fire_index(neighborhood):
 
 n_s_wind = wind.get_wind('north_south_wind')
 e_w_wind = wind.get_wind('east_west_wind')
+ne_sw_wind = wind.get_wind('ne-sw-wind')
+no_wind = wind.default_wind
+
 
 def serialize_neighborhood(nbh):
     new_nbh = np.empty((3,3), dtype=float)
@@ -70,7 +73,7 @@ def wildfire_prob(home, neighborhood):
     ash_neighbors = ashes(neighborhood)
     fire_neighbors = fire(neighborhood)
     serialized_nbh = serialize_neighborhood(neighborhood)
-    nbh_wind = wind.apply_wind(serialized_nbh, n_s_wind, intensity=1)
+    nbh_wind = wind.apply_wind(serialized_nbh, no_wind, intensity=1)
     
     fire_index = get_fire_index(nbh_wind)
     

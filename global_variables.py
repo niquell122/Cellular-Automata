@@ -3,12 +3,12 @@ import bisect
 import numpy as np
 
 #### Possible AI Customizable Parametes ####
-STARTING_FIRE_SIZE = 2
 FIRE_INDEX_THRESHHOLD = 3
-FIRE_INDEX_MAX = 8
 FIRE_NEIGHBORS_THRESHHOLD = 7
 SIGMOID_K = 1.5
 #############################################
+STARTING_FIRE_SIZE = 2
+FIRE_INDEX_MAX = 8
 
 ########### Graphical Options ##############
 square_size = 1                 # meter

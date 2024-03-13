@@ -9,7 +9,7 @@ from global_variables import ash_color
 from global_variables import catch_fire_chance
 
 
-def single_staring_point(size):
+def single_staring_point(size = 1):
     arr = []
     for i in range(map_side):
         arr.append([])

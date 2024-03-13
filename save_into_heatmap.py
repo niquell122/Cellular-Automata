@@ -11,7 +11,7 @@ matplotlib.use("Agg")
 from global_variables import gen_text_color
 from global_variables import text_rect_color
 
-from cellular_automata.prototype_deterministic import _2B
+from cellular_automata.prototype_wind import _2B
 
 prototype = "Wind - HeatMap Data"
 
@@ -20,10 +20,8 @@ formatted_time = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(current_time)
 
 
 current_dir = os.getcwd()
-folder_name = f"{prototype} {formatted_time}"
-data_folder_path = os.path.join(current_dir, "data")
-# prototype_folder_path = os.path.join(data_folder_path, folder_name)
-prototype_folder_path = data_folder_path
+fileName = f"{prototype} {formatted_time}"
+data_folder_path = os.path.join(current_dir, "data", "HeatMap")
 
 window_width = 1200
 window_height = 900
@@ -41,7 +39,7 @@ map_cords = (map_cord_x, map_cord_y)
 generation = 1
 # savepoints = [1, 2, 3, 4, 5, 8, 10, 20, 30, 40]
 # savepoints = list(range(41))
-savepoints = [1, 40]
+savepoints = [40]
 
 def increase_generation():
     global generation
@@ -66,9 +64,9 @@ def save_data(surf):
         print("Saving... " + get_gen_text())
         if not os.path.exists(data_folder_path):
             os.makedirs(data_folder_path)
-        if not os.path.exists(prototype_folder_path):
-            os.makedirs(prototype_folder_path)
-        image_path = os.path.join(prototype_folder_path, f"{get_gen_text()}.png")
+        if not os.path.exists(data_folder_path):
+            os.makedirs(data_folder_path)
+        image_path = os.path.join(data_folder_path, f"{fileName}.png")
         pygame.image.save(surf, image_path)
 
 pygame.init()
@@ -117,7 +115,7 @@ def update_screen():
 def evolveOnce():
     increase_generation()
     _2B.evolve()
-    update_screen()
+    # update_screen()
 
 def verboseEvolve(n_steps):
     for i in range(n_steps):
@@ -131,55 +129,8 @@ def fastEvolve(n_steps):
 
     update_screen()
 
-def inside_map(pos):
-    if inside_mapX(pos[0]) and inside_mapY(pos[1]):
-        return True
-    else:
-        return False
-  
-def inside_mapX(posX):
-    if map_cord_x <= posX <= map_cord_x + window_width:
-        return True
+def get_last_generation(imax=40):
+    fastEvolve(imax-1)
+    pygame.quit()
 
-def inside_mapY(posY):
-    if map_cord_y <= posY <= map_cord_x + window_height:
-        return True
-
-def auto(imax = 50):
-    update_screen()
-    i=0
-    while i < imax:
-        i += 1
-        evolveOnce()
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                crashed = True
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_q:
-                    pygame.quit()
-
-def no_auto():
-    update_screen()
-    crashed = False
-    while not crashed:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                crashed = True
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_e:
-                    evolveOnce()
-                if event.key == pygame.K_f:
-                    fastEvolve(10)
-                if event.key == pygame.K_v:
-                    verboseEvolve(10)
-                if event.key == pygame.K_q:
-                    pygame.quit()
-                if event.key == pygame.K_u:
-                    update_screen()
-
-is_auto = True
-
-if is_auto:
-    auto(40)
-else:
-    no_auto()
+get_last_generation()

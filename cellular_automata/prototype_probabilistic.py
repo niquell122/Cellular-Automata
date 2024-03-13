@@ -51,6 +51,6 @@ def wildfire_prob(home, neigh):
     ### matriz de influencia do vento
     return home
 
-arr = map.random_spread_in_the_center(40)
+arr = map.single_staring_point()
 
 _2B = CellularAutomata(arr, wildfire_prob)
